@@ -21,12 +21,12 @@ V.style.left = 0;
 V.width = W = innerWidth;
 V.height = H = innerHeight;
 //H=1;
-txt=[0,0,1,0,0,0,0,1,1,1,0,0,1,0,0,1,1,0,0,0];
 
 z=80;
 mc=Math.cos,ms=Math.sin;
-t=l=o=q=j=s=v=1;
+t=l=o=q=j=s=v=e=1;
 n=.01745;
+//px=ob();
 px=ob();
 ff=[function(q){return mc(4*q)},function(q){return sm(4*q)-mc(q)},function(q){return q;}],f=ff[0];
 function u() 
@@ -44,6 +44,7 @@ function u()
 		//if (m&&x.t) l=n*q, ro=Math.exp(ms(q))-2*mc(4*q)+Math.pow(ms((2*q-3.1415)/24),5), x.x= x.ix + 100*ro*mc(l), x.y= x.iy + 100*ro*ms(l);
 		//if (x.t) l=n*q, x.x= x.ix + 100*(ms(l)*(Math.exp(mc(l))-2*mc(4*l)-Math.pow(ms(l/12),5))), x.y= x.iy + 100*(mc(l)*(Math.exp(mc(l))-2*mc(4*l)-Math.pow(ms(l/12),5)));		// BUTTERFLY YAY
 		x=px[i];
+		if (!x) continue;
 		if (m&&x.t==1&&x.l<x.d&&o!=6) x.y=eioq(x.l,x.iy,x.py-x.iy,x.d), x.l+=.16;
 		if (x.t==1&&x.l>x.d) x.l=0,x.t=0, x.d=60+.1*x.x-.05*x.y,x.ix=x.x, x.iy=x.y;
 		if (!x.t) ++x.o;
@@ -57,7 +58,7 @@ function u()
 	if (j<0&&s>60) f=ff[2], v=50, j=-j,k=70,s=0,o=5;
 	if (!o&&t%20==0) s+=3,v+=1;
 	if (o>4&&o<7&&t%820==0) o=6; 
-	if (o>5&&t%300==0) o=1, m=0,f=ff[0],px=ob();//LOOOP
+	if (o>5&&t%300==0) o=1, m=0,f=ff[0],px=e?genT(1):ob(), e=1-e;//LOOOP
 
 	//if (t%120==0) s+=2,v+=1;
 	//if () s=200;
@@ -90,6 +91,22 @@ function ob()
 	return c;
 }
 
+function genT(yy)
+{
+	h=['f00','0f0','00f'];
+	txt=[0,0,1,1,0,0,1,1,1,0,0,1,0,1,0,1,1,1,0,0,
+		 0,0,1,0,1,0,1,1,0,0,0,1,1,1,0,1,0,1,0,0,
+		 0,0,1,1,0,0,1,1,1,0,0,1,0,1,0,1,1,1,0,0,
+		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,
+		 0,0,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0,0];c=[];
+	for(i=139;i--;)
+		if(txt[i]) c.push({x:(i%20)*z,y:(20+yy)*z,c:'#'+h[Math.random()*3|0],s:z,t:1,ix:(i%20)*z,iy:(20+yy)*z,d:10+.2*yy,px:(i%20)*z,py:(yy+i/20|0)*z,l:0,o:0});
+	j=1;s=-5;v=5;k=30;
+	return c;
+}
+
 function r()
 {
 	//p=++t%5|0;l=(l+(p?0:1))%(H/z|0);
@@ -109,6 +126,7 @@ function r()
 		//if (m&&x>200&&x<1200&&y>200&&y<640) C.fillStyle='#0f0', C.fillRect(,y,z,z);
 		//else C.fillRect(x,y,z,z);
 		x=px[i];
+		if (!x) continue;
 	//	if (x.t || (x.x>200&&x.x<1200&&x.y>160&&x.y<241))
 		if (o!=6) C.fillStyle=x.c, C.fillRect(x.x,x.y,x.s,x.s);
 	}
