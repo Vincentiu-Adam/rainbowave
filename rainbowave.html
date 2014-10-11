@@ -85,27 +85,70 @@ function u()
 		e.c += 1;
 	}
 */
+	m=++t>40;
+	i=0;
+//	for(i=(W*H/z|0)-1;i--;)
+	{
+		x=px[i];
+		//if (m&&x.x>200/*&&x.x<1200&&x.y>160&&x.y<241*/) x.x-=10*.16, x.ix-=10*.16; //&&x.y>200&&x.y<640) 
+		//if (m&&x.x>180&&x.x<200) l=n*q, x.x+=25*mc(l), x.y+=25*ms(l);
+		//if (!x.t&&m&&x.x>180&&x.x<200) x.t=1;
+		//if (x.t) l=n*q, x.x= x.ix + 500*mc(l), x.y= x.iy + 300*ms(3*l);
+		if (x.t) l=n*q, x.x= x.ix + 100*(ms(l)*(Math.exp(mc(l))-2*mc(4*l)-Math.pow(ms(l/12),5))), x.y= x.iy + 100*(mc(l)*(Math.exp(mc(l))-2*mc(4*l)-Math.pow(ms(l/12),5)));		
+		//if (!m) q=0;
+		//if (m&&x.t) l=n*q, ro=ms(Math.pow(q,2))-1.7, x.x= x.ix + 100*ro*mc(l), x.y= x.iy + 100*ro*ms(l);
+		//if (m&&x.t) l=n*q, ro=Math.exp(ms(q))-2*mc(4*q)+Math.pow(ms((2*q-3.1415)/24),5), x.x= x.ix + 100*ro*mc(l), x.y= x.iy + 100*ro*ms(l);
+	}
+
+	q+=2*.16;
 }
+tw= [function(){return (i/W|0)*z},function(x){return .05*x*x}]; 
+
+z=80;
+function colors()
+{
+	h=['f00','0f0','00f'],c=[];
+	for(i=W*H;i-=z;c.push(h[Math.random()*3|0]));
+	return c;
+}
+
+function ob()
+{
+	h=colors();c=[];
+	//for(i=W*H;i-=z;c.push({x:i%W,y:(i/W|0)*z,c:'#'+h[i],s:z,t:0,ix:i%W,iy:(i/W|0)*z}));
+	c.push( {x:W/2,y:H/2,c:'#'+h[0],s:z,t:1,ix:W/2,iy:H/2} );
+	return c;
+}
+
+px=ob();
 mc=Math.cos,ms=Math.sin;
 t=l=o=q=j=1;
 n=.01745;
 function r()
 {
-	h=['f00','0f0','00f'];
-	z=80;p=++t%5|0;l=(l+(p?0:1))%(H/z|0);
-	m=t>120;
+	//p=++t%5|0;l=(l+(p?0:1))%(H/z|0);
+	
 	//o=!p?1+Math.random()*2|0:o;
 	C.fillStyle='#000';
-	C.fillRect(0,0,W,H);
-	for(i=W*H;i-=z;)
+	C.globalAlpha = .1;
+	//C.fillRect(0,0,W,H);
+	i=0;
+	//for(i=(W*H/z|0)-1;i--;)
 	{
 		//console.log(i + " " + i%W + " " + (i/W|0) );
-		x=i%W,y=i/W|0;
-		if (!m) C.fillStyle='#'+h[y>l?0:o],C.fillRect(x,y*z,z,z),q=0;
-		else C.fillStyle='#'+h[0]; j=q*n; /*C.fillRect(x*.5+x*mc(l)+y*ms(l),y*.5+y*mc(l)-x*ms(l),z,z);*/ C.fillRect(x + 25*mc(l),y + 25*ms(l),z,z);
+		//x=i%W,y=(i/W|0)*z;
+		//if (!m) C.fillStyle='#'+h[y>l?0:o],C.fillRect(x,y*z,z,z),q=0;
+		//else C.fillStyle='#'+h[0]; j=q*n; /*C.fillRect(x*.5+x*mc(l)+y*ms(l),y*.5+y*mc(l)-x*ms(l),z,z);*/ C.fillRect(x + 25*mc(l),y + 25*ms(l),z,z);
+		//C.fillStyle='#'+ h[i];
+		//if (m&&x>200&&x<1200&&y>200&&y<640) C.fillStyle='#0f0', C.fillRect(,y,z,z);
+		//else C.fillRect(x,y,z,z);
+		x=px[i];
+	//	if (x.t || (x.x>200&&x.x<1200&&x.y>160&&x.y<241))
+		{
+			C.fillStyle=x.c;
+			C.fillRect(x.x,x.y,x.s,x.s);
+		}
 	}
-	
-	q+=16;
 	
 	//C.drawImage(c,0,0);
 /*
